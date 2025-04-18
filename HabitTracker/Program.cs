@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using HabitTracker.Data; // Namespace for your AppDbContext
 using HabitTracker.Models; // Namespace for your models (if needed elsewhere)
 using HabitTracker.Components;
+using HabitTracker.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(connectionString));
 // --- End DbContext registration ---
+
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 var app = builder.Build();
 
