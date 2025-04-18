@@ -74,7 +74,7 @@ h1:focus {
 }
 
 .content-container {
-    max-width: 67rem;
+    max-width: 100rem;
 }
 
 
@@ -150,7 +150,6 @@ nav .navbar-nav .nav-item .nav-link .bi {
 /* ============================================== */
 /* End of styles moved from NavMenu.razor.css   */
 /* ============================================== */
-
 
 /* === Rocket Animation === */
 @keyframes float {

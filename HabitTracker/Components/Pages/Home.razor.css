@@ -1,0 +1,152 @@
+/* ============================================== */
+/* Home Page Quote Carousel Styles              */
+/* ============================================== */
+
+/* .home-quote-carousel .quote-carousel-box (no change) */
+.home-quote-carousel .quote-carousel-box {
+    position: relative;
+    overflow: hidden;
+}
+
+/* .home-quote-carousel .quote-decoration (no change) */
+.home-quote-carousel .quote-decoration {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    z-index: 0;
+    transform-origin: center center;
+    opacity: 1;
+}
+
+/* MODIFIED rule - Reduced translation */
+.home-quote-carousel .quote-decoration-1 {
+    top: 0;
+    left: 0;
+    /* Rotate and translate less outwards */
+    transform: rotate(-20deg) translateX(-25%) translateY(-50%);
+}
+
+/* MODIFIED rule - Reduced translation */
+.home-quote-carousel .quote-decoration-2 {
+    bottom: 0;
+    right: 0;
+    /* Rotate and translate less outwards */
+    transform: rotate(40deg) translateX(50%) translateY(20%);
+}
+
+/* --- Styles for quote text, items, indicators remain the same --- */
+/* ... (Keep the rest of the quote carousel styles the same) ... */
+
+.home-quote-carousel .quote-content { /* ... */ }
+.home-quote-carousel .quote-item { /* ... */ }
+.home-quote-carousel .quote-item.active { /* ... */ }
+.home-quote-carousel .quote-text { /* ... */ }
+.home-quote-carousel .quote-author { /* ... */ }
+.home-quote-carousel .quote-indicators { /* ... */ }
+.home-quote-carousel .quote-dot { /* ... */ }
+.home-quote-carousel .quote-dot.active { /* ... */ }
+
+/* ============================================== */
+/* End Home Page Quote Carousel Styles          */
+/* ============================================== */
+
+/* Home.razor.css */
+
+.quote-carousel-box {
+    position: relative; /* Needed for absolute positioning of decorations */
+    overflow: hidden; /* Hide parts of decorations sticking out */
+    /* Background, shadow, padding, border-radius applied via Bootstrap classes */
+}
+
+.quote-decoration {
+    position: absolute;
+    width: 60px; /* Match SVG width */
+    height: 60px; /* Match SVG height */
+    opacity: 0.6; /* Make decoration slightly faded */
+    z-index: 0; /* Ensure it's behind quote text */
+}
+
+.quote-decoration-1 {
+    top: 0.5rem; /* Adjust position */
+    left: 0.5rem; /* Adjust position */
+}
+
+.quote-decoration-2 {
+    bottom: 0.5rem; /* Adjust position */
+    right: 0.5rem; /* Adjust position */
+    /*transform: rotate(180deg); !* Flip the bottom-right one *!*/
+}
+
+.quote-content {
+    position: relative; /* Ensure text is above decorations */
+    z-index: 1;
+    min-height: 120px; /* Give space for quotes of different lengths */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.quote-item {
+    /* Basic text styling applied via Bootstrap classes */
+    text-align: center;
+    /* Animation styles */
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    position: absolute; /* Allow stacking for fade */
+    width: 100%; /* Take full width of container */
+    left:0;
+    padding-left: 1.5rem; /* Add padding to avoid hitting decorations */
+    padding-right: 1.5rem;
+    display: none; /* Hide inactive quotes */
+}
+
+.quote-item.active {
+    opacity: 1;
+    position: relative; /* Let active take space */
+    display: block; /* Show active quote */
+}
+
+/* Additional styling for quote text if needed */
+.quote-text {
+    font-style: italic;
+    /* font-size: 1.1rem; */ /* Example: adjust size */
+}
+
+/* Additional styling for author */
+.quote-author {
+    /* text-align: right; */ /* Centered looks okay too */
+    /* font-size: 0.9rem; */
+    /* margin-top: 0.5rem; */
+}
+
+
+.quote-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    position: relative; /* Ensure dots are above decorations */
+    z-index: 1;
+}
+
+.quote-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #d1d5db; /* Default gray color (like gray-300) */
+    margin: 0 5px;
+    cursor: pointer; /* Optional: if you add manual clicking later */
+    transition: background-color 0.3s ease-in-out;
+}
+
+.quote-dot.active {
+    background-color: #4F46E5; /* Active purple color */
+}
+
+/* Optional: Dark mode overrides if needed and not handled by Bootstrap variables */
+/* @media (prefers-color-scheme: dark) {
+    .quote-carousel-box { background-color: #1f2937; } // gray-800
+    .quote-text { color: #d1d5db; } // gray-300
+    .quote-author { color: #9ca3af; } // gray-400
+    .quote-dot { background-color: #4b5563; } // gray-600
+    .quote-dot.active { background-color: #4F46E5; }
+} */

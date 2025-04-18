@@ -1,7 +1,147 @@
 ﻿@page "/"
+@using System.Timers
+@implements IDisposable
 
-<PageTitle>Momentum App - Progress, Amplified.</PageTitle>
+<PageTitle>Momentum - Progress, Amplified.</PageTitle>
 
-<h1>Hello, world!</h1>
+@* Add a wrapper div for more specific CSS targeting *@
+<div class="home-quote-carousel"> 
 
-Welcome to your new app.
+    @* Quote Carousel Box *@
+    <div class="quote-carousel-box bg-light p-4 shadow rounded position-relative mb-4">
+
+        @* Top-Left Decorative SVG Quote *@
+        <div class="quote-decoration quote-decoration-1">
+            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="rgba(79, 70, 229, 0.2)"></path>
+            </svg>
+        </div>
+
+        @* Quote Content Area *@
+        <div class="quote-content">
+            @if (Quotes.Any())
+            {
+                @for (int i = 0; i < Quotes.Count; i++)
+                {
+                    var quote = Quotes[i];
+                    var isActive = i == currentQuoteIndex;
+                    <div class="quote-item @(isActive ? "active" : "")">
+                        <p class="quote-text text-secondary fst-italic fs-5">"@quote.Text"</p>
+                        <p class="quote-author text-muted text-end mt-2">— @quote.Author</p>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Loading quotes...</p>
+            }
+        </div>
+
+        @* Bottom-Right Decorative SVG Quote *@
+         <div class="quote-decoration quote-decoration-2">
+             <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 @* Using the same path, relying on CSS for position/rotation *@
+                 <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="rgba(79, 70, 229, 0.2)"></path> 
+             </svg>
+         </div>
+
+        @* Indicator Dots *@
+        <div class="quote-indicators">
+            @for (int i = 0; i < Quotes.Count; i++)
+            {
+                var dotClass = i == currentQuoteIndex ? "quote-dot active" : "quote-dot";
+                <div class="@dotClass"></div>
+            }
+        </div>
+    </div>
+
+</div> @* End of home-quote-carousel wrapper *@
+
+@* You can add other Home page content below the carousel here *@
+
+
+@code {
+    // --- C# code block remains unchanged ---
+    private List<QuoteModel> Quotes { get; set; } = new();
+    private int currentQuoteIndex = 0;
+    private System.Timers.Timer? _timer;
+    private const double QUOTE_INTERVAL_MS = 5000; // 5 seconds
+
+    protected override void OnInitialized()
+    {
+        LoadQuotes();
+        SetupTimer();
+    }
+
+     private void LoadQuotes()
+    {
+        Quotes = new List<QuoteModel>
+        {
+            new QuoteModel("The secret of getting ahead is getting started.", "Mark Twain"),
+            new QuoteModel("The best way to predict the future is to create it.", "Peter Drucker"),
+            new QuoteModel("Don't watch the clock; do what it does. Keep going.", "Sam Levenson"),
+            new QuoteModel("The key is not to prioritize what's on your schedule, but to schedule your priorities.", "Stephen Covey"),
+            new QuoteModel("Productivity is never an accident. It is always the result of a commitment to excellence, intelligent planning, and focused effort.", "Paul J. Meyer"),
+            new QuoteModel("Success is not final, failure is not fatal: It is the courage to continue that counts.", "Winston Churchill"),
+            new QuoteModel("Focus on being productive instead of busy.", "Tim Ferriss"),
+            new QuoteModel("The way to get started is to quit talking and begin doing.", "Walt Disney"),
+            new QuoteModel("Ordinary people think merely of spending time, great people think of using it.", "Arthur Schopenhauer"),
+            new QuoteModel("You were born to win, but to be a winner, you must plan to win, prepare to win, and expect to win.", "Zig Ziglar"),
+            new QuoteModel("It always seems impossible until it's done.", "Nelson Mandela"),
+            new QuoteModel("The only way to do great work is to love what you do.", "Steve Jobs"),
+            new QuoteModel("Amateurs sit and wait for inspiration, the rest of us just get up and go to work.", "Stephen King"),
+            new QuoteModel("Your mind is for having ideas, not holding them.", "David Allen"),
+            new QuoteModel("Concentrate all your thoughts upon the work in hand. The sun's rays do not burn until brought to a focus.", "Alexander Graham Bell"),
+            new QuoteModel("Do the hard jobs first. The easy jobs will take care of themselves.", "Dale Carnegie"),
+            new QuoteModel("The shorter way to do many things is to do only one thing at a time.", "Mozart"),
+            new QuoteModel("Efficiency is doing things right; effectiveness is doing the right things.", "Peter Drucker"),
+            new QuoteModel("Action is the foundational key to all success.", "Pablo Picasso"),
+            new QuoteModel("What gets measured gets managed.", "Peter Drucker"),
+            new QuoteModel("If you spend too much time thinking about a thing, you'll never get it done.", "Bruce Lee"),
+            new QuoteModel("Until we can manage time, we can manage nothing else.", "Peter Drucker"),
+            new QuoteModel("Strive not to be a success, but rather to be of value.", "Albert Einstein"),
+            new QuoteModel("The successful warrior is the average man, with laser-like focus.", "Bruce Lee"),
+            new QuoteModel("You don't have to be great to start, but you have to start to be great.", "Zig Ziglar"),
+            new QuoteModel("Progress is impossible without change, and those who cannot change their minds cannot change anything.", "George Bernard Shaw"),
+            new QuoteModel("Perfection is not attainable, but if we chase perfection we can catch excellence.", "Vince Lombardi"),
+            new QuoteModel("Motivation is what gets you started. Habit is what keeps you going.", "Jim Ryun"),
+            new QuoteModel("Discipline is the bridge between goals and accomplishment.", "Jim Rohn"),
+            new QuoteModel("Work smarter, not harder.", "Allen F. Morgenstern"),
+            new QuoteModel("The simple act of paying positive attention to people has a great deal to do with productivity.", "Tom Peters"),
+            new QuoteModel("If you want to make an easy job seem mighty hard, just keep putting off doing it.", "Olin Miller")
+        };
+    }
+
+    private void SetupTimer()
+    {
+        _timer = new System.Timers.Timer(QUOTE_INTERVAL_MS);
+        _timer.Elapsed += OnTimerElapsed;
+        _timer.AutoReset = true;
+        _timer.Enabled = true;
+    }
+
+    private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        currentQuoteIndex = (currentQuoteIndex + 1) % Quotes.Count;
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        _timer?.Stop();
+        _timer?.Dispose();
+    }
+
+    public class QuoteModel
+    {
+        public string Text { get; set; }
+        public string Author { get; set; }
+
+        public QuoteModel(string text, string author)
+        {
+            Text = text;
+            Author = author;
+        }
+    }
+    // --- End of C# code block ---
+}
