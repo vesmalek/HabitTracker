@@ -1,57 +1,18 @@
-/* Remove or comment out styles related to the old grid/flex layout */
-
+/* Add padding-top to create space above the navbar */
 .page {
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Ensure page takes full height */
+    min-height: 100vh;
+    padding-top: 2rem; /* Add space above the entire content (incl. NavMenu) */
 }
 
 main {
-    flex: 1; /* Allow main content to grow and fill available space */
-    padding-top: 1rem; /* Add some space below the new top navbar */
+    flex: 1;
+    /* padding-top: 1rem; /* Remove this if added previously, handled by container now */
 }
 
-.content {
-    /* Keep existing content padding or adjust as needed */
-}
-
-
-/* Remove styles for the old sidebar */
-/*
-.sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
-}
-*/
-
-/* Remove styles for the old top row if they existed here */
-/*
-.top-row {
-    background-color: #f7f7f7;
-    border-bottom: 1px solid #d6d5d5;
-    justify-content: flex-end;
-    height: 3.5rem;
-    display: flex;
-    align-items: center;
-}
-
-    .top-row ::deep a, .top-row ::deep .btn-link {
-        white-space: nowrap;
-        margin-left: 1.5rem;
-        text-decoration: none;
-    }
-
-    .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
-        text-decoration: underline;
-    }
-
-    .top-row ::deep a:first-child {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-*/
-
-/* Existing error UI styles can remain */
+/* Keep existing error UI styles */
 #blazor-error-ui {
     background: lightyellow;
     bottom: 0;

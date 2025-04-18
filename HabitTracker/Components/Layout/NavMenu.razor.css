@@ -1,38 +1,49 @@
 /* Style for the container within the navbar-brand link */
 .navbar-brand {
-    padding-top: 0; /* Override bootstrap default padding */
+    padding-top: 0;
     padding-bottom: 0;
-    margin-right: 0 !important; /* Override bootstrap margin */
+    margin-right: 0 !important;
 }
 
 .brand-container {
-    display: inline-block; /* Keep it inline but allow block children */
-    vertical-align: middle; /* Align container vertically if needed */
+    display: inline-block;
+    vertical-align: middle;
 }
 
-/* Style for the main brand name */
+/* Style for the main brand name - adjust line-height slightly */
 .brand-name {
-    display: block; /* Make it take its own line */
+    display: block;
     font-family: 'Poppins', sans-serif;
     font-size: 1.875rem; /* 30px / 16px */
-    font-weight: 700; /* Bold */
-    color: #3730A3; /* Custom purple color */
-    line-height: 1.1; /* Adjust line height */
+    font-weight: 700;
+    color: #3730A3;
+    line-height: 1.2; /* Slightly increased */
 }
 
-/* Updated style for the motto below the brand name */
+/* Updated style for the motto - ensure margin-top is appropriate */
 .brand-motto {
-    display: block; /* Make it take its own line */
-    font-family: 'Inter', sans-serif; /* Use Inter font */
+    display: block;
+    font-family: 'Inter', sans-serif;
     font-size: 0.875rem; /* 14px / 16px */
-    font-weight: 500; /* Medium weight */
-    color: #6B7280; /* Muted gray color (rgb(107 114 128)) */
+    font-weight: 500;
+    color: #6B7280;
     line-height: 1.25rem; /* 20px / 16px */
-    margin-top: 0; /* Explicitly set margin-top to 0 */
+    margin-top: 0.1rem; /* Small positive margin for slight separation */
 }
 
-/* Keep other necessary styles for .nav-item, .nav-link etc. if needed */
+/* Keep other necessary styles */
 .nav-item .nav-link {
     display: flex;
-    align-items: center; /* Vertically align icon and text */
+    align-items: center;
+    color: #3730A3; /* Optional: Match brand color? Adjust as needed */
+    font-weight: 500; /* Optional: Make nav links slightly bolder */
+}
+
+/* Optional: Style for active/hover nav links if default isn't distinct enough */
+.nav-item .nav-link.active {
+    color: #4f46e5; /* Example: Slightly brighter purple */
+    font-weight: 700;
+}
+.nav-item .nav-link:hover {
+    color: #4f46e5; /* Example: Slightly brighter purple */
 }

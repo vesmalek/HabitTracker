@@ -1,6 +1,5 @@
-﻿@* Uses Bootstrap navbar classes for a horizontal top bar *@
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom mb-3">
-    @* Use container and custom class for max-width *@
+﻿@* Removed bg-light, border-bottom. Added py-3 for internal vertical padding *@
+<nav class="navbar navbar-expand-lg mb-3 py-3">
     <div class="container content-container"> 
         <a class="navbar-brand me-0" href=""> 
             <div class="brand-container">
@@ -11,9 +10,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        @* Removed justify-content-center from this div *@
         <div class="collapse navbar-collapse" id="navbarNav"> 
-            @* Add ms-auto to the ul element to push links to the right *@
             <ul class="navbar-nav ms-auto"> 
                 <li class="nav-item px-3"> 
                     <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
