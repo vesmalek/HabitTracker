@@ -74,6 +74,6 @@ h1:focus {
 }
 
 .content-container {
-    max-width: 65rem; /* Equivalent to 960px (960/16). Adjust this value as needed */
+    max-width: 67rem; /* Equivalent to 960px (960/16). Adjust this value as needed */
     /* The .container class already provides margin: auto for centering */
 }
