@@ -1,5 +1,19 @@
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif; /* Default font for paragraphs and body */
+}
+
+/* Updated rule for the background pattern */
+body {
+    background-color: #f8fafc; /* Very light grey base color */
+    background-image:
+            linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px), /* Vertical lines - FAINTER */
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px); /* Horizontal lines - FAINTER */
+    background-size: 12px 12px; /* SMALLER grid squares */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif; /* Font for all heading levels */
+    font-weight: 700; /* Optional: Make headings bold by default */
 }
 
 a, .btn-link {
@@ -57,4 +71,9 @@ h1:focus {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
+}
+
+.content-container {
+    max-width: 65rem; /* Equivalent to 960px (960/16). Adjust this value as needed */
+    /* The .container class already provides margin: auto for centering */
 }

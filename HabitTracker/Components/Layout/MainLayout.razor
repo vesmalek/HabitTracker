@@ -1,18 +1,15 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
+    <NavMenu />
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        @* Add custom class 'content-container' alongside 'container' *@
+        <div class="container content-container"> 
+            <article class="content pt-3"> 
+                @Body
+            </article>
         </div>
-
-        <article class="content px-4">
-            @Body
-        </article>
     </main>
 </div>
 
