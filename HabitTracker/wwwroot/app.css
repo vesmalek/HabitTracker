@@ -2,7 +2,7 @@ html, body {
     font-family: 'Inter', sans-serif; /* Default font for paragraphs and body */
 }
 
-/* Updated rule for the background pattern */
+/* Rule for the background pattern */
 body {
     background-color: #f8fafc; /* Very light grey base color */
     background-image:
@@ -16,8 +16,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700; /* Optional: Make headings bold by default */
 }
 
-/* Link color - NOTE: This might conflict with nav link styles below */
-/* Consider removing or commenting this out if nav links don't get the purple color */
+/* Commented out conflicting global link color */
 /* a, .btn-link { */
 /* color: #006bb7; */
 /* } */
@@ -116,31 +115,45 @@ nav .brand-motto {
     margin-top: 0.1rem;
 }
 
-/* Nav Link Styling */
+/* --- Nav Link Styling --- */
 nav .navbar-nav .nav-item .nav-link {
-    display: flex;
+    display: inline-flex; /* Changed to inline-flex for better fit */
     align-items: center;
-    color: #3730A3; /* Base color (original brand purple) */
+    vertical-align: middle; /* Added for better vertical centering */
+    color: #3730A3;
     font-weight: 500;
     text-decoration: none;
+
+    /* Padding & Shape for background effect */
+    padding: 0.3rem 0.75rem; /* Adjusted padding */
+    border-radius: 0.375rem; /* Rounded corners */
+
+    /* Underline setup (kept for active state) */
     border-bottom: 2px solid transparent;
-    padding-bottom: 0.25rem;
-    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+
+    /* Smooth transition */
+    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    margin-top: 2px; /* Align better vertically with multi-line brand */
+    margin-bottom: 2px; /* Align better vertically with multi-line brand */
 }
 
 nav .navbar-nav .nav-item .nav-link:hover {
-    color: #4f46e5; /* Brighter purple on hover */
+    color: #4f46e5; /* Brighter purple text */
+    background-color: rgba(79, 70, 229, 0.08); /* Subtle light purple background highlight */
+    border-bottom-color: transparent; /* Ensure no underline shows on hover */
 }
 
 nav .navbar-nav .nav-item .nav-link.active {
-    color: #4f46e5 !important; /* Brighter purple - Using !important temporarily */
-    font-weight: 700 !important; /* Make text bold - Using !important temporarily */
-    border-bottom-color: #4f46e5 !important; /* Show underline - Using !important temporarily */
+    color: #4f46e5; /* Brighter purple text */
+    font-weight: 700; /* Bold text */
+    border-bottom-color: #4f46e5; /* Purple underline */
+    background-color: transparent; /* No background highlight for active */
 }
 
 /* Ensure icons within links inherit color changes */
 nav .navbar-nav .nav-item .nav-link .bi {
     color: inherit;
+    margin-right: 0.5rem; /* Spacing between icon and text */
 }
 
 /* ============================================== */
