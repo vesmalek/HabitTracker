@@ -1,0 +1,105 @@
+@page "/projects"
+@inject HabitTracker.Services.IProjectService ProjectService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer // Or InteractiveAuto if configured
+
+<PageTitle>Projects</PageTitle>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Your Projects</h1>
+    <button class="btn btn-primary" @onclick="NavigateToAddProject">
+        <i class="bi bi-plus-lg me-2"></i>Add New Project
+    </button>
+</div>
+
+@if (projects == null)
+{
+    <p><em>Loading projects...</em></p>
+}
+else if (!projects.Any())
+{
+    <div class="text-center p-5">
+        <p>No projects found. Get started by adding one!</p>
+        <button class="btn btn-lg btn-success" @onclick="NavigateToAddProject">
+            <i class="bi bi-plus-circle-fill me-2"></i>Create Your First Project
+        </button>
+    </div>
+}
+else
+{
+    <div class="row gy-4">
+        @foreach (var project in projects)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@project.Name</h5>
+                        <p class="card-text text-muted flex-grow-1">@project.Description</p>
+                        <div class="mt-3 d-flex justify-content-end gap-2">
+                            @* TODO: Add Edit/Delete functionality later *@
+                            <button class="btn btn-sm btn-outline-secondary" @onclick="() => ViewProject(project.Id)">
+                                 <i class="bi bi-eye me-1"></i>View Tasks 
+                            </button>
+                            <button class="btn btn-sm btn-outline-primary" @onclick="() => EditProject(project.Id)">
+                                 <i class="bi bi-pencil me-1"></i>Edit
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" @onclick="() => DeleteProject(project.Id)">
+                                <i class="bi bi-trash me-1"></i>Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+@code {
+    private List<HabitTracker.Models.Project>? projects;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProjects();
+    }
+
+    private async Task LoadProjects()
+    {
+        projects = await ProjectService.GetProjectsAsync();
+    }
+
+    private void NavigateToAddProject()
+    {
+        NavigationManager.NavigateTo("/projects/add");
+    }
+
+    private void ViewProject(int projectId)
+    {
+        // TODO: Navigate to a project details page (e.g., /project/{projectId}) - To be created later
+        NavigationManager.NavigateTo($"/project/{projectId}"); // Placeholder for future page
+         Console.WriteLine($"View project {projectId}"); // Placeholder
+    }
+
+     private void EditProject(int projectId)
+    {
+        // TODO: Navigate to an edit project page (e.g., /projects/edit/{projectId}) - To be created later
+         NavigationManager.NavigateTo($"/projects/edit/{projectId}"); // Placeholder for future page
+         Console.WriteLine($"Edit project {projectId}"); // Placeholder
+    }
+
+    private async Task DeleteProject(int projectId)
+    {
+        // TODO: Add confirmation dialog before deleting
+        try
+        {
+            await ProjectService.DeleteProjectAsync(projectId);
+            await LoadProjects(); // Refresh the list
+             StateHasChanged(); // Ensure UI updates
+        }
+        catch (Exception ex)
+        {
+            // TODO: Show error message to user
+            Console.WriteLine($"Error deleting project {projectId}: {ex.Message}");
+        }
+    }
+}
