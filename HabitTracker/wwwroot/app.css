@@ -1,19 +1,18 @@
 html, body {
-    font-family: 'Inter', sans-serif; /* Default font for paragraphs and body */
+    font-family: 'Inter', sans-serif;
 }
 
-/* Rule for the background pattern */
 body {
-    background-color: #f8fafc; /* Very light grey base color */
+    background-color: #f8fafc;
     background-image:
-            linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px), /* Vertical lines - FAINTER */
-            linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px); /* Horizontal lines - FAINTER */
-    background-size: 12px 12px; /* SMALLER grid squares */
+            linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+    background-size: 12px 12px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Poppins', sans-serif; /* Font for all heading levels */
-    font-weight: 700; /* Optional: Make headings bold by default */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
 }
 
 /* Commented out conflicting global link color */
@@ -74,7 +73,6 @@ h1:focus {
     text-align: start;
 }
 
-/* Custom style to make the main content area narrower */
 .content-container {
     max-width: 67rem;
 }
@@ -117,45 +115,53 @@ nav .brand-motto {
 
 /* --- Nav Link Styling --- */
 nav .navbar-nav .nav-item .nav-link {
-    display: inline-flex; /* Changed to inline-flex for better fit */
+    display: inline-flex;
     align-items: center;
-    vertical-align: middle; /* Added for better vertical centering */
+    vertical-align: middle;
     color: #3730A3;
     font-weight: 500;
     text-decoration: none;
-
-    /* Padding & Shape for background effect */
-    padding: 0.3rem 0.75rem; /* Adjusted padding */
-    border-radius: 0.375rem; /* Rounded corners */
-
-    /* Underline setup (kept for active state) */
+    padding: 0.3rem 0.75rem;
+    border-radius: 0.375rem;
     border-bottom: 2px solid transparent;
-
-    /* Smooth transition */
     transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
-    margin-top: 2px; /* Align better vertically with multi-line brand */
-    margin-bottom: 2px; /* Align better vertically with multi-line brand */
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 nav .navbar-nav .nav-item .nav-link:hover {
-    color: #4f46e5; /* Brighter purple text */
-    background-color: rgba(79, 70, 229, 0.08); /* Subtle light purple background highlight */
-    border-bottom-color: transparent; /* Ensure no underline shows on hover */
+    color: #4f46e5;
+    background-color: rgba(79, 70, 229, 0.08);
+    border-bottom-color: transparent;
 }
 
 nav .navbar-nav .nav-item .nav-link.active {
-    color: #4f46e5; /* Brighter purple text */
-    font-weight: 700; /* Bold text */
-    border-bottom-color: #4f46e5; /* Purple underline */
-    background-color: transparent; /* No background highlight for active */
+    color: #4f46e5;
+    font-weight: 700;
+    border-bottom-color: #4f46e5;
+    background-color: transparent;
 }
 
-/* Ensure icons within links inherit color changes */
 nav .navbar-nav .nav-item .nav-link .bi {
     color: inherit;
-    margin-right: 0.5rem; /* Spacing between icon and text */
+    margin-right: 0.5rem;
 }
 
 /* ============================================== */
-/* End of styles moved from NavMenu.razor.css */
+/* End of styles moved from NavMenu.razor.css   */
 /* ============================================== */
+
+
+/* === Rocket Animation === */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    /* Increased distance from -3px to -5px */
+    50% { transform: translateY(-5px); }
+}
+
+.rocket-emoji {
+    display: inline-block;
+    /* Shortened duration from 3s to 2.5s */
+    animation: float 2.5s ease-in-out infinite;
+}
+/* === End Rocket Animation === */

@@ -1,9 +1,12 @@
-﻿@* Removed bg-light, border-bottom. Added py-3 for internal vertical padding *@
+﻿@* Uses Bootstrap navbar classes for a horizontal top bar *@
 <nav class="navbar navbar-expand-lg mb-3 py-3">
     <div class="container content-container"> 
         <a class="navbar-brand me-0" href=""> 
             <div class="brand-container">
-                <span class="brand-name">Momentum 🚀</span>
+                @* Wrap emoji in its own span *@
+                <span class="brand-name">
+                    Momentum <span class="rocket-emoji">🚀</span>
+                </span>
                 <span class="brand-motto">Progress, Amplified</span>
             </div>
         </a>
